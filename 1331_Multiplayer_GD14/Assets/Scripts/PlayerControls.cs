@@ -10,9 +10,12 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] private float _backstepStrength;
     [SerializeField] private float _backstepLength;
     [SerializeField] private float _attackLength;
+    [SerializeField] private float _guardLength;
     private Vector2 _input;
     private bool _actionable = true;
     private bool _attacking = false;
+    private bool _guarding = false;
+    public int _score;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -53,6 +56,16 @@ public class PlayerControls : MonoBehaviour
         }
     }
 
+    public void Guard(InputAction.CallbackContext context)
+    {
+        if (_actionable)
+        {
+            _guarding = true;
+            _actionable = false;
+            StartCoroutine(GuardCooldown());
+        }
+    }
+
     public IEnumerator Cooldown(float cooldownLength)
     {
         yield return new WaitForSeconds(cooldownLength);
@@ -61,15 +74,25 @@ public class PlayerControls : MonoBehaviour
         _input = Vector2.zero;
     }
 
+    public IEnumerator GuardCooldown()
+    {
+        yield return new WaitForSeconds(_guardLength);
+        _guarding = false;
+        yield return new WaitForSeconds(_guardLength);
+        _actionable = true;
+    }
+
     //Animation things
     [SerializeField] private Animator _animator;
 
     private static readonly int Speed = Animator.StringToHash("Speed");
     private static readonly int Attacking = Animator.StringToHash("Attacking");
+    private static readonly int Guarding = Animator.StringToHash("Guarding");
 
     private void AnimParameters()
     {
         _animator.SetFloat(Speed, _input.sqrMagnitude);
         _animator.SetBool(Attacking, _attacking);
+        _animator.SetBool(Guarding, _guarding);
     }
 }
