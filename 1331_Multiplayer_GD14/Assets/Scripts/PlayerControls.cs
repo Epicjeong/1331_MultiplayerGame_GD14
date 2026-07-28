@@ -8,8 +8,11 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] private CharacterController _charControl;
     [SerializeField] private float _speed;
     [SerializeField] private float _backstepStrength;
+    [SerializeField] private float _backstepLength;
+    [SerializeField] private float _attackLength;
     private Vector2 _input;
     private bool _actionable = true;
+    private bool _attacking = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -21,6 +24,7 @@ public class PlayerControls : MonoBehaviour
     void Update()
     {
         _charControl.Move(_input * _speed * Time.deltaTime);
+        AnimParameters();
     }
 
     public void Forward(InputAction.CallbackContext context)
@@ -35,8 +39,17 @@ public class PlayerControls : MonoBehaviour
         {
             _input = new Vector2(_backstepStrength, 0) * context.ReadValue<Vector2>();
             _actionable = false;
-            var backstepLength = .1f;
-            StartCoroutine(Cooldown(backstepLength));
+            StartCoroutine(Cooldown(_backstepLength));
+        }
+    }
+
+    public void Attack(InputAction.CallbackContext context)
+    {
+        if (_actionable)
+        {
+            _attacking = true;
+            _actionable = false;
+            StartCoroutine(Cooldown(_attackLength));
         }
     }
 
@@ -44,6 +57,19 @@ public class PlayerControls : MonoBehaviour
     {
         yield return new WaitForSeconds(cooldownLength);
         _actionable = true;
+        _attacking = false;
         _input = Vector2.zero;
+    }
+
+    //Animation things
+    [SerializeField] private Animator _animator;
+
+    private static readonly int Speed = Animator.StringToHash("Speed");
+    private static readonly int Attacking = Animator.StringToHash("Attacking");
+
+    private void AnimParameters()
+    {
+        _animator.SetFloat(Speed, _input.sqrMagnitude);
+        _animator.SetBool(Attacking, _attacking);
     }
 }
