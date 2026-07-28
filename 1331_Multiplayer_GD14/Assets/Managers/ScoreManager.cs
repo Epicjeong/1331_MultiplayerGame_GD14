@@ -2,6 +2,11 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
+    [SerializeField] private PlayerControls _p1Controller;
+    [SerializeField] private PlayerControls _p2Controller;
+    private int _p1Score;
+    private int _p2Score;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -12,5 +17,17 @@ public class ScoreManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void AddScore(PlayerControls scorer)
+    {
+        if (scorer == _p1Controller)
+        {
+            _p1Score++;
+        }
+        else if (scorer == _p2Controller)
+        {
+            _p2Score++;
+        }
     }
 }
