@@ -15,6 +15,7 @@ public class PlayerControls : MonoBehaviour
     private bool _attacking = false;
     public bool _actionable = true;
     public bool _guarding = false;
+    public bool _stunned = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -90,11 +91,13 @@ public class PlayerControls : MonoBehaviour
     private static readonly int Speed = Animator.StringToHash("Speed");
     private static readonly int Attacking = Animator.StringToHash("Attacking");
     private static readonly int Guarding = Animator.StringToHash("Guarding");
+    private static readonly int Stunned = Animator.StringToHash("Stunned");
 
     private void AnimParameters()
     {
         _animator.SetFloat(Speed, _input.sqrMagnitude);
         _animator.SetBool(Attacking, _attacking);
         _animator.SetBool(Guarding, _guarding);
+        _animator.SetBool(Stunned, _stunned);
     }
 }

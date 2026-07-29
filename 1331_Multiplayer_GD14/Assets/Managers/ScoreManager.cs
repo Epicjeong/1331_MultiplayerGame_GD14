@@ -29,7 +29,5 @@ public class ScoreManager : MonoBehaviour
         {
             _p1Score++;
         }
-        Debug.Log(_p1Score);
-        Debug.Log(_p2Score);
     }
 }
