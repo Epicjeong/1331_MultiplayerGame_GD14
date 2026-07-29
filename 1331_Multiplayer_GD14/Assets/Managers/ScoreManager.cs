@@ -19,15 +19,17 @@ public class ScoreManager : MonoBehaviour
         
     }
 
-    public void AddScore(PlayerControls scorer)
+    public void AddScore(PlayerControls hitPlayer)
     {
-        if (scorer == _p1Controller)
-        {
-            _p1Score++;
-        }
-        else if (scorer == _p2Controller)
+        if (hitPlayer == _p1Controller)
         {
             _p2Score++;
         }
+        else if (hitPlayer == _p2Controller)
+        {
+            _p1Score++;
+        }
+        Debug.Log(_p1Score);
+        Debug.Log(_p2Score);
     }
 }

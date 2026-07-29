@@ -6,16 +6,15 @@ using UnityEngine.Windows;
 public class PlayerControls : MonoBehaviour
 {
     [SerializeField] private CharacterController _charControl;
-    [SerializeField] private ScoreManager _scoreManager;
     [SerializeField] private float _speed;
     [SerializeField] private float _backstepStrength;
     [SerializeField] private float _backstepLength;
     [SerializeField] private float _attackLength;
     [SerializeField] private float _guardLength;
     private Vector2 _input;
-    private bool _actionable = true;
     private bool _attacking = false;
-    private bool _guarding = false;
+    public bool _actionable = true;
+    public bool _guarding = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -66,11 +65,6 @@ public class PlayerControls : MonoBehaviour
         }
     }
 
-    public void OnTriggerEnter(Collider other)
-    {
-        var opponent = other.GetComponent<PlayerControls>();
-        _scoreManager.AddScore(opponent);
-    }
 
     //Universal cooldown, adjustable for most actions
     public IEnumerator Cooldown(float cooldownLength)
