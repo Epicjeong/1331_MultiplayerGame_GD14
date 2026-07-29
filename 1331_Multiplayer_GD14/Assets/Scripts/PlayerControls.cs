@@ -12,7 +12,7 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] private float _attackLength;
     [SerializeField] private float _guardLength;
     private Vector2 _input;
-    private bool _attacking = false;
+    public bool _attacking = false;
     public bool _actionable = true;
     public bool _guarding = false;
     public bool _stunned = false;
@@ -72,6 +72,7 @@ public class PlayerControls : MonoBehaviour
     {
         yield return new WaitForSeconds(cooldownLength);
         _actionable = true;
+        _stunned = false;
         _attacking = false;
         _input = Vector2.zero;
     }
@@ -81,7 +82,7 @@ public class PlayerControls : MonoBehaviour
     {
         yield return new WaitForSeconds(_guardLength);
         _guarding = false;
-        yield return new WaitForSeconds(_guardLength);
+        yield return new WaitForSeconds(_guardLength * 2);
         _actionable = true;
     }
 

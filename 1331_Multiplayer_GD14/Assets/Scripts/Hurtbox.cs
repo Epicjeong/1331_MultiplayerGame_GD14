@@ -10,11 +10,10 @@ public class Hurtbox : MonoBehaviour
     {
         if (_player._guarding)
         {
-            Debug.Log(_player._guarding);
-            StopCoroutine(_attackingPlayer.Cooldown(1));
             _attackingPlayer._actionable = false;
             _attackingPlayer._stunned = true;
-            StartCoroutine(_attackingPlayer.Cooldown(1f));
+            _player._guarding = false;
+            _player._actionable = true;
         }
         else if (!_player._guarding)
             _scoreManager.AddScore(_player);
