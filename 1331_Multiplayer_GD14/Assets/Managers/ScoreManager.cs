@@ -21,6 +21,8 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private Vector2 _countdownStartPos;
     [SerializeField] private Vector2 _countdownEndPos;
     [SerializeField] private float _countdownTransitionTime;
+    [SerializeField] private AudioSource _countdownAudioSource;
+    [SerializeField] private AudioSource _startAudioSource;
     private int _roundNumber;
     private int _roundStartTime = 3;
 
@@ -132,10 +134,12 @@ public class ScoreManager : MonoBehaviour
         for (var i = _roundStartTime; i > 0; i--)
         {
             _countdownText.text = "Round starts in " + i;
+            _countdownAudioSource.Play();
             yield return new WaitForSeconds(1);
 
         }
 
+        _startAudioSource.Play();
         _countdownText.text = "FIGHT";
         _countdownPanel.DOAnchorPos(_countdownStartPos, _countdownTransitionTime).SetEase(Ease.InQuad);
 

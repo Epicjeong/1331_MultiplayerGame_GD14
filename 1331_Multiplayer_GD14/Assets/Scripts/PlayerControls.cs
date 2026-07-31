@@ -12,6 +12,8 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] private float _attackLength;
     [SerializeField] private float _guardLength;
     [SerializeField] private Transform _spawn;
+    [SerializeField] private AudioSource _attackAudio;
+    [SerializeField] private AudioSource _blockAudio;
     private Vector2 _input;
     public bool _attacking = false;
     public bool _actionable = false;
@@ -53,7 +55,9 @@ public class PlayerControls : MonoBehaviour
     {
         if (_actionable)
         {
+            _input = Vector2.zero;
             _attacking = true;
+            _attackAudio.Play();
             StartCoroutine(Cooldown(_attackLength));
         }
     }
@@ -62,6 +66,8 @@ public class PlayerControls : MonoBehaviour
     {
         if (_actionable)
         {
+            _input = Vector2.zero;
+            _blockAudio.Play();
             _guarding = true;
             StartCoroutine(GuardCooldown());
         }
@@ -89,7 +95,7 @@ public class PlayerControls : MonoBehaviour
         yield return new WaitForSeconds(_guardLength);
         _guarding = false;
         yield return new WaitForSeconds(_guardLength * 2);
-        //_actionable = true;
+        _actionable = true;
     }
 
     //Animation things

@@ -1,31 +1,14 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-public class Winner : MonoBehaviour
+public class StartScreen : MonoBehaviour
 {
-    [SerializeField] private TMP_Text _winnerText;
     [SerializeField] private GameObject _p1ReadyText;
     [SerializeField] private GameObject _p2ReadyText;
-    [SerializeField] private AudioSource _winSound;
     [SerializeField] private AudioSource _readySound;
     private bool _p1Ready = false;
     private bool _p2Ready = false;
-
-    public void WinGame(int winner)
-    {
-        _winSound.Play();
-        if (winner == 1)
-        {
-            _winnerText.text = "PLAYER 1";
-        }
-        if (winner == 2)
-        {
-            _winnerText.text = "PLAYER 2";
-        }
-    }
-
     public void P1Ready(InputAction.CallbackContext context)
     {
         _p1Ready = true;
@@ -44,7 +27,7 @@ public class Winner : MonoBehaviour
 
     public void Restart()
     {
-        if (_p1Ready && _p2Ready) 
+        if (_p1Ready && _p2Ready)
             SceneManager.LoadScene("SampleScene");
     }
 }
