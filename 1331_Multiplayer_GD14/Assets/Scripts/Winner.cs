@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class Winner : MonoBehaviour
 {
     [SerializeField] private TMP_Text _winnerText;
+    [SerializeField] private GameObject _p1ReadyText;
+    [SerializeField] private GameObject _p2ReadyText;
     private bool _p1Ready = false;
     private bool _p2Ready = false;
 
@@ -24,12 +26,14 @@ public class Winner : MonoBehaviour
     public void P1Ready(InputAction.CallbackContext context)
     {
         _p1Ready = true;
+        _p1ReadyText.SetActive(true);
         Restart();
     }
 
     public void P2Ready(InputAction.CallbackContext context)
     {
         _p2Ready = true;
+        _p2ReadyText.SetActive(true);
         Restart();
     }
 
