@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using DG.Tweening;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -14,6 +15,13 @@ public class ScoreManager : MonoBehaviour
     private int _placementOffset = 100;
 
     [SerializeField] private TMP_Text _roundText;
+    [SerializeField] private RectTransform _hitPanel;
+    [SerializeField] private float _transitionDuration;
+    [SerializeField] private Vector2 _leftPosLow;
+    [SerializeField] private Vector2 _leftPosHigh;
+    [SerializeField] private Vector2 _rightPosHigh;
+    [SerializeField] private Vector2 _rightPosLow;
+    private float _panelRotation = 30f;
     private int _roundNumber;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -34,6 +42,12 @@ public class ScoreManager : MonoBehaviour
     {
         if (hitPlayer == _p1Controller)
         {
+            _hitPanel.rotation = Quaternion.Euler(0, 0, _panelRotation);
+            _hitPanel.anchoredPosition = _leftPosLow;
+            _hitPanel.DOAnchorPos(Vector2.zero, _transitionDuration).SetEase(Ease.InQuad).OnComplete(() =>
+            {
+                _hitPanel.DOAnchorPos(_rightPosHigh, _transitionDuration).SetEase(Ease.InQuad);
+            });
             _p2Score++;
             Vector2 pos = new Vector2(_p2ScoreTracker.position.x + (_placementOffset * _p2Score), _p2ScoreTracker.position.y);
             var marker = Instantiate(_scoreMark, _p2ScoreTracker);
@@ -41,6 +55,12 @@ public class ScoreManager : MonoBehaviour
         }
         else if (hitPlayer == _p2Controller)
         {
+            _hitPanel.rotation = Quaternion.Euler(0, 0, -_panelRotation);
+            _hitPanel.anchoredPosition = _rightPosLow;
+            _hitPanel.DOAnchorPos(Vector2.zero, _transitionDuration).SetEase(Ease.InQuad).OnComplete(() =>
+            {
+                _hitPanel.DOAnchorPos(_leftPosHigh, _transitionDuration).SetEase(Ease.InQuad);
+            });
             _p1Score++;
             Vector2 pos = new Vector2(_p1ScoreTracker.position.x - (_placementOffset * _p1Score), _p1ScoreTracker.position.y);
             var marker = Instantiate(_scoreMark, _p1ScoreTracker);

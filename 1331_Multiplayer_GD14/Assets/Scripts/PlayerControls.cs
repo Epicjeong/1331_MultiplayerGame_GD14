@@ -13,7 +13,7 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] private float _guardLength;
     private Vector2 _input;
     public bool _attacking = false;
-    public bool _actionable = true;
+    public bool _actionable = false;
     public bool _guarding = false;
     public bool _stunned = false;
 
