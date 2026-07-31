@@ -11,8 +11,7 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private Transform _p1ScoreTracker;
     [SerializeField] private Transform _p2ScoreTracker;
     [SerializeField] protected GameObject _scoreMark;
-    private int _markSize = 50;
-    private int _placementOffset = 320;
+    private int _placementOffset = 100;
 
     [SerializeField] private TMP_Text _roundText;
     private int _roundNumber;
@@ -36,16 +35,16 @@ public class ScoreManager : MonoBehaviour
         if (hitPlayer == _p1Controller)
         {
             _p2Score++;
-            Vector2 pos = new Vector2(_p2Score * -_markSize + _placementOffset, transform.position.y);
-            var marker = Instantiate(_scoreMark, _p1ScoreTracker);
-            //marker.transform.position = pos;
+            Vector2 pos = new Vector2(_p2ScoreTracker.position.x + (_placementOffset * _p2Score), _p2ScoreTracker.position.y);
+            var marker = Instantiate(_scoreMark, _p2ScoreTracker);
+            marker.transform.position = pos;
         }
         else if (hitPlayer == _p2Controller)
         {
             _p1Score++;
-            Vector2 pos = new Vector2(_p2Score * -_markSize - _placementOffset, transform.position.y);
+            Vector2 pos = new Vector2(_p1ScoreTracker.position.x - (_placementOffset * _p1Score), _p1ScoreTracker.position.y);
             var marker = Instantiate(_scoreMark, _p1ScoreTracker);
-            //marker.transform.position = pos;
+            marker.transform.position = pos;
         }
 
         NextRound();

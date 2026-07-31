@@ -387,7 +387,7 @@ MonoBehaviour:
   _backstepStrength: 5
   _backstepLength: 0.1
   _attackLength: 0.3
-  _guardLength: 0.5
+  _guardLength: 0.25
   _attacking: 0
   _actionable: 1
   _guarding: 0
@@ -1466,7 +1466,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6174793201934448400, guid: ff8126321a4b4664e825dc0f4009616d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6174793201934448400, guid: ff8126321a4b4664e825dc0f4009616d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1758,18 +1758,17 @@ MonoBehaviour:
   _p2Controller: {fileID: 66020901}
   _p1ScoreTracker: {fileID: 1760881590}
   _p2ScoreTracker: {fileID: 589774084}
-  _scoreMark: {fileID: 0}
+  _scoreMark: {fileID: 8555999732223001951, guid: 70f86db7f0c725741b8760f8b4daf3e7, type: 3}
   _roundText: {fileID: 1522021103}
---- !u!4 &1235511866
-Transform:
+--- !u!224 &1235511866
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1235511864}
-  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -960, y: -540, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1777,6 +1776,11 @@ Transform:
   - {fileID: 589774084}
   m_Father: {fileID: 344213151}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -960, y: -540}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1241180462
 GameObject:
   m_ObjectHideFlags: 0
@@ -2521,7 +2525,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6174793201934448400, guid: ff8126321a4b4664e825dc0f4009616d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6174793201934448400, guid: ff8126321a4b4664e825dc0f4009616d, type: 3}
       propertyPath: m_LocalPosition.y
